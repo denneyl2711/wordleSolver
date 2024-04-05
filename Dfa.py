@@ -45,6 +45,7 @@ class Dfa:
         #note: accepting state must be 0 in this dfa
         return stateDiagram
     
+    #TODO: delete unneeded rows while creating this state diagram? (unused states are common)
     def create_diag_with_letter_index(letter, index):
         stateDiagram = [
               #a  b  c  d  e  f  g  h  i  j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z         
