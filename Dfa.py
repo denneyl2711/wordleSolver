@@ -31,3 +31,26 @@ class Dfa:
                 return False
         return False
     
+    def create_diag_without_letter(letter):
+        stateDiagram = [
+                 #a  b  c  d  e  f  g  h  i  j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z     
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], #state 0
+                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]  #trap state
+
+        ]
+        
+        letter_index = ord(letter) - ord('a')
+        stateDiagram[0][letter_index] = 1
+        
+        return stateDiagram
+
+
+        #example: no 'a'
+        # stateDiagram = [
+        #          #a  b  c  d  e  f  g  h  i  j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z     
+        #          [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], #state 0
+        #          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]  #trap state
+
+        # ]
+        # acceptingState = 0
+    

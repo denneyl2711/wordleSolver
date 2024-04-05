@@ -69,7 +69,10 @@ def main():
     
     count = 0
     max_words = 10
-    test_dfa = Dfa(stateDiagram, acceptingState)
+    #test_dfa = Dfa(stateDiagram, acceptingState)
+    diagram_without_letter = Dfa.create_diag_without_letter('l')
+    test_dfa = Dfa(diagram_without_letter, 0) #accepting state is 0 for diagrams which only check if a letter is present
+    
     for word in wordle_answer_words:
         print(word + " is accepted: " + str(test_dfa.is_string_accepted(word)))
         count = count + 1
