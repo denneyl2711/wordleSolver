@@ -1,6 +1,7 @@
 class Dfa:
     state_diagram = None
     accepting_state = -1
+    #assume the start state is always 0
     
     def __init__(self, stateDiagram, acceptingState):
         self.state_diagram = stateDiagram
@@ -12,9 +13,20 @@ class Dfa:
     def get_accepting_state(self):
         return self.accepting_state
     
+    def __repr__(self):
+        output = ""
+        output = output + " a  b  c  d  e  f  g  h  i  j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z" + '\n'
+        i = 0
+        for row in self.state_diagram:
+            output = output + str(row) + " state " + str(i) + "\n"
+            i = i + 1
+        output = output + "Accepting state: " + str(self.accepting_state)
+        
+        return output
+
+    
     def is_string_accepted(self, inputString):
         startState = 0
-        #acceptingState = 1 #TODO: make a class to encapsulate the state diagram transitions and the accepting state(s)
 
         while inputString:
             currentState = startState
@@ -23,6 +35,7 @@ class Dfa:
                 integer_value = ord(char) - ord('a')
                 #print(integer_value, char)
                 currentState = self.state_diagram[currentState][integer_value]
+                    
            
     
             if currentState == self.accepting_state:
@@ -41,7 +54,7 @@ class Dfa:
         
         letter_as_index = ord(letter) - ord('a')
         stateDiagram[0][letter_as_index] = 1
-        
+                
         #note: accepting state must be 0 in this dfa
         return stateDiagram
     
@@ -74,14 +87,54 @@ class Dfa:
             else:
                 stateDiagram[index][k] = 6 #point to trap state
                 
+                
         #we only have to change one row
         #the rest of the rows (besides accepting and trap) represent states which cannot be accessed
 
         
         #note: accepting state must be 5 in this dfa
         return stateDiagram
+    
+    #TODO: DOES NOT PRODUCT CORRECT OUTPUT
+    def create_dfa_intersection(dfa1, dfa2):
+        stateDiagram1 = dfa1.get_state_diagram()
+        stateDiagram2 = dfa2.get_state_diagram()
+        
+        #number of states in final diagram is, at most, stateDiagram1.length * stateDiagram2.length
+        # print("First dfa has " + str(len(stateDiagram1)) + " states")
+        # print("Second dfa has " + str(len(stateDiagram2)) + " states")
+        intersection_diagram = [[]for i in range(len(stateDiagram1) * len(stateDiagram2))]
 
+        
+        #TODO: optimize so that each DFA knows its alphabet and we can go through fewer states?
+        alphabet = "abcdefghijklmnopqrstuvwxyz"
+        
+        state = 0
+        for i in range(len(stateDiagram1)):
+            for k in range(len(stateDiagram2)):
+                for letter in alphabet:
+                    letter_as_index = ord(letter) - ord('a')
+                    calculated_state = 0
+                    
+                    #where does state diagram 1 go?
+                    calculated_state = calculated_state + stateDiagram1[i][letter_as_index]
+                    
+                    #where does state diagram 2 go?
+                    calculated_state = calculated_state + stateDiagram2[k][letter_as_index]
+                    
+                    state_index = i * len(stateDiagram2) + k
+                    intersection_diagram[state_index].append(calculated_state)
+                    
+                    
+                    
+                state = state + 1
 
+        a_state_1 = dfa1.get_accepting_state()
+        a_state_2 = dfa2.get_accepting_state()
+        
+        accepting_state = a_state_1 * len(stateDiagram2) + a_state_2
+        
+        return Dfa(intersection_diagram, accepting_state)
 
 
 
