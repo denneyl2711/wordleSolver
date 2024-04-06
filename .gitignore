@@ -9,3 +9,6 @@
 /.vs/wordleSolver/FileContentIndex/49a38df1-4346-4789-a6e9-40f58821f43b.vsidx
 /.vs/wordleSolver/FileContentIndex/755e3261-dd03-4cf5-84e5-3fa98c253cff.vsidx
 /.vs
+/.vs/wordleSolver/v17/.wsuo
+/.vs/slnx.sqlite
+/__pycache__/Dfa.cpython-36.pyc
