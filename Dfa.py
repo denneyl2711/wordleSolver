@@ -95,7 +95,6 @@ class Dfa:
         #note: accepting state must be 5 in this dfa
         return stateDiagram
     
-    #TODO: DOES NOT PRODUCT CORRECT OUTPUT
     def create_dfa_intersection(dfa1, dfa2):
         stateDiagram1 = dfa1.get_state_diagram()
         stateDiagram2 = dfa2.get_state_diagram()
