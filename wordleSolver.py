@@ -48,8 +48,6 @@ def main():
 
         if intersection_dfa.is_string_accepted(word):
             print(word + " is accepted")
-           
-            
             
         if test_dfa.is_string_accepted(word) and test_dfa_2.is_string_accepted(word):
             print("            " + word + " accepted by manual intersection")

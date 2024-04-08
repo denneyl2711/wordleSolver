@@ -114,13 +114,15 @@ class Dfa:
             for k in range(len(stateDiagram2)):
                 for letter in alphabet:
                     letter_as_index = ord(letter) - ord('a')
-                    calculated_state = 0
+                    
                     
                     #where does state diagram 1 go?
-                    calculated_state = calculated_state + stateDiagram1[i][letter_as_index]
+                    state1 = stateDiagram1[i][letter_as_index]
                     
                     #where does state diagram 2 go?
-                    calculated_state = calculated_state + stateDiagram2[k][letter_as_index]
+                    state2 = stateDiagram2[k][letter_as_index]
+                    
+                    calculated_state = state1 * len(stateDiagram2) + state2
                     
                     state_index = i * len(stateDiagram2) + k
                     intersection_diagram[state_index].append(calculated_state)
@@ -133,6 +135,7 @@ class Dfa:
         a_state_2 = dfa2.get_accepting_state()
         
         accepting_state = a_state_1 * len(stateDiagram2) + a_state_2
+        
         
         return Dfa(intersection_diagram, accepting_state)
 
